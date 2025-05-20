@@ -2,7 +2,7 @@ git init
 
 git add .
 
-git commit -m "tab1 columns column"
+git commit -m "tab1 bank"
 
 git remote add origin https://github.com/goldshoot0720/remixwithbulma20250705.git
 
