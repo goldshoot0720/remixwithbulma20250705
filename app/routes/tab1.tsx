@@ -5,8 +5,8 @@ export default function Tab1Page() {
         <div className="subtitle">Tab1 Page</div>
         <div className="columns">
           <div className="column">1111</div>
-          <div className="column">1111</div>
-          <div className="column">1111</div>
+          <div className="column">2222</div>
+          <div className="column">3333</div>
         </div>
       </div>
     </div>
