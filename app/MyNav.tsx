@@ -67,7 +67,9 @@ export default function MyNav() {
       <div className="navbar-menu" id="navbar">
         <div className="navbar-start"></div>
         <Link to="/" className="navbar-item">
-          Home
+          <i className="fa-solid fa-heart" style={{ color: "tomato" }}>
+            Home
+          </i>
         </Link>
         <Link to="/tab1" className="navbar-item">
           Tab1
@@ -97,7 +99,9 @@ export default function MyNav() {
           Tab9
         </Link>
         <Link to="/about" className="navbar-item">
-          About
+          <i className="fa-solid fa-heart" style={{ color: "tomato" }}>
+            About
+          </i>
         </Link>
         <div className="navbar-end"></div>
       </div>
