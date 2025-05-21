@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 /**
  * 更新指定 Udemy 課程的排程
- * @param {string} id - 課程 ID
+ * @param {number} id - 課程 ID
  * @param {string} schedule - 新的排程內容
  * @returns {Promise<boolean>} 是否成功
  */
