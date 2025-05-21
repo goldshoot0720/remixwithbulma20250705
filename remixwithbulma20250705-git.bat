@@ -2,7 +2,7 @@ git init
 
 git add .
 
-git commit -m "tab1 sort"
+git commit -m "tab2 udemy"
 
 git remote add origin https://github.com/goldshoot0720/remixwithbulma20250705.git
 

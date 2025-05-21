@@ -75,7 +75,7 @@ export default function MyNav() {
           Bank
         </Link>
         <Link to="/tab2" className="navbar-item">
-          Tab2
+          Udemy
         </Link>
         <Link to="/tab3" className="navbar-item">
           Tab3
