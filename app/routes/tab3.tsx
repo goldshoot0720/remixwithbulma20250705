@@ -159,39 +159,43 @@ export default function Tab3Page() {
       <h2>Subscribe Page</h2>
 
       {subscribes.map((sub) => (
-        <div key={sub.id} style={{ marginBottom: 16 }}>
-          <div>
+        <div className="rows" key={sub.id}>
+          <div className="row">
             <a href={sub.link} target="_blank" rel="noopener noreferrer">
               <strong>{sub.item}</strong>
             </a>
           </div>
-          <label>
-            Fee:{" "}
-            <input
-              type="number"
-              min={0}
-              value={sub.fee}
-              onChange={(e) => handleFeeChange(sub.id, e.target.value)}
-            />
-          </label>
-
-          <label style={{ marginLeft: 12 }}>
-            Card:{" "}
-            <input
-              type="text"
-              value={sub.card}
-              onChange={(e) => handleCardChange(sub.id, e.target.value)}
-            />
-          </label>
-
-          <label style={{ marginLeft: 12 }}>
-            Next:{" "}
-            <input
-              type="date"
-              value={sub.next.slice(0, 10)} // YYYY-MM-DD
-              onChange={(e) => handleNextChange(sub.id, e.target.value)}
-            />
-          </label>
+          <div className="row">
+            <label>
+              Fee:{" "}
+              <input
+                type="number"
+                min={0}
+                value={sub.fee}
+                onChange={(e) => handleFeeChange(sub.id, e.target.value)}
+              />
+            </label>
+          </div>
+          <div className="row">
+            <label>
+              Card:{" "}
+              <input
+                type="text"
+                value={sub.card}
+                onChange={(e) => handleCardChange(sub.id, e.target.value)}
+              />
+            </label>
+          </div>
+          <div className="row">
+            <label>
+              Next:{" "}
+              <input
+                type="date"
+                value={sub.next.slice(0, 10)} // YYYY-MM-DD
+                onChange={(e) => handleNextChange(sub.id, e.target.value)}
+              />
+            </label>
+          </div>
         </div>
       ))}
 

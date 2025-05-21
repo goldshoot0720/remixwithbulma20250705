@@ -109,17 +109,12 @@ export default function Tab2Page() {
           const displaySchedule = pendingSchedules[udemy.id] ?? udemy.schedule;
 
           return (
-            <div key={udemy.id} className="rows" style={{ marginBottom: 16 }}>
-              <div className="row" style={{ marginBottom: 4 }}>
+            <div key={udemy.id} className="rows">
+              <div className="row">
                 <strong>{udemy.course}</strong>
               </div>
-              <div className="row" style={{ marginBottom: 4 }}>
-                {udemy.teacher}
-              </div>
-              <div
-                className="row"
-                style={{ display: "flex", alignItems: "center" }}
-              >
+              <div className="row">{udemy.teacher}</div>
+              <div className="row">
                 <input
                   type="text"
                   value={displaySchedule}
@@ -128,7 +123,7 @@ export default function Tab2Page() {
                   }
                   style={{ width: "60%", marginRight: 8 }}
                 />
-                <div className="row" style={{ marginRight: 12 }}>
+                <div className="row">
                   {(parseScheduleRatio(displaySchedule) * 100).toFixed(2)}%
                 </div>
                 <div className="row">
