@@ -2,7 +2,7 @@ git init
 
 git add .
 
-git commit -m "tab1 Prisma Postgres"
+git commit -m "tab1 bank page"
 
 git remote add origin https://github.com/goldshoot0720/remixwithbulma20250705.git
 

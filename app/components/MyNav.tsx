@@ -72,7 +72,7 @@ export default function MyNav() {
           </i>
         </Link>
         <Link to="/tab1" className="navbar-item">
-          Tab1
+          Bank
         </Link>
         <Link to="/tab2" className="navbar-item">
           Tab2

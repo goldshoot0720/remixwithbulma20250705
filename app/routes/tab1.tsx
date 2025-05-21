@@ -77,7 +77,7 @@ export default function Tab1Page() {
 
   return (
     <div className="container">
-      <h2>Tab1 Page</h2>
+      <h2>Bank Page</h2>
 
       {banks.map((bank) => (
         <div key={bank.id} className="rows" style={{ marginBottom: 12 }}>
