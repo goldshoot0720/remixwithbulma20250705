@@ -25,3 +25,12 @@ model Bank {
   name String @unique
   saving Int 
 }
+
+model Subscribe {
+    id Int @id @default(autoincrement())
+    item String @unique
+    link String
+    fee Int 
+    card String 
+    next DateTime
+}

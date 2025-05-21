@@ -78,7 +78,7 @@ export default function MyNav() {
           Udemy
         </Link>
         <Link to="/tab3" className="navbar-item">
-          Tab3
+          Subscribe
         </Link>
         <Link to="/tab4" className="navbar-item">
           Tab4

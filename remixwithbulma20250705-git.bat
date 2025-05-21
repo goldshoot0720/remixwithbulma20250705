@@ -2,7 +2,7 @@ git init
 
 git add .
 
-git commit -m "tab2 edit"
+git commit -m "tab3 Subscribe"
 
 git remote add origin https://github.com/goldshoot0720/remixwithbulma20250705.git
 
