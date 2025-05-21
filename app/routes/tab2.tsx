@@ -4,13 +4,21 @@ import { getUdemy } from "../db/getUdemy";
 import { updateUdemy } from "../db/updateUdemy";
 import { useRef, useEffect, useState } from "react";
 
-// Loader：取得所有 Udemy 課程資料
+function parseScheduleRatio(schedule: string): number {
+  if (!schedule) return 0;
+  const parts = schedule.split("/");
+  if (parts.length !== 2) return 0;
+  const numerator = parseFloat(parts[0]);
+  const denominator = parseFloat(parts[1]);
+  if (isNaN(numerator) || isNaN(denominator) || denominator === 0) return 0;
+  return numerator / denominator;
+}
+
 export const loader: LoaderFunction = async () => {
   const udemys = await getUdemy();
   return json(udemys);
 };
 
-// Action：更新單筆課程 schedule
 export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
   const id = formData.get("id")?.toString();
@@ -37,29 +45,40 @@ export const action: ActionFunction = async ({ request }) => {
   }
 };
 
-// 頁面元件
 export default function Tab2Page() {
   const initialData = useLoaderData<typeof loader>();
-  const [udemys, setUdemys] = useState(initialData);
+  const [udemys, setUdemys] = useState(() =>
+    [...initialData].sort(
+      (a, b) => parseScheduleRatio(b.schedule) - parseScheduleRatio(a.schedule)
+    )
+  );
+
   const debounceTimers = useRef<Record<number, NodeJS.Timeout>>({});
   const fetcher = useFetcher();
 
-  // 當更新成功後重新讀取資料，保持同步
+  // 更新成功後重新讀取資料保持同步
   useEffect(() => {
     if (fetcher.type === "done" && fetcher.data?.success) {
       fetcher.load("/tab2");
     }
   }, [fetcher.data, fetcher.type]);
 
+  // 及時更新輸入並排序
   const handleScheduleChange = (id: number, value: string) => {
-    setUdemys((prev) =>
-      prev.map((u) => (u.id === id ? { ...u, schedule: value } : u))
-    );
+    setUdemys((prev) => {
+      // 先更新該筆 schedule
+      const newData = prev.map((u) =>
+        u.id === id ? { ...u, schedule: value } : u
+      );
+      // 排序並回傳新陣列
+      return [...newData].sort(
+        (a, b) =>
+          parseScheduleRatio(b.schedule) - parseScheduleRatio(a.schedule)
+      );
+    });
 
-    if (debounceTimers.current[id]) {
-      clearTimeout(debounceTimers.current[id]);
-    }
-
+    // debounce 送出更新
+    if (debounceTimers.current[id]) clearTimeout(debounceTimers.current[id]);
     debounceTimers.current[id] = setTimeout(() => {
       const formData = new FormData();
       formData.append("id", id.toString());
@@ -71,7 +90,7 @@ export default function Tab2Page() {
   return (
     <div>
       <div className="container">
-        <h1>Udemy 課程清單</h1>
+        <h1>Udemy Page</h1>
         {udemys.map((udemy) => (
           <div key={udemy.id} className="rows" style={{ marginBottom: 16 }}>
             <div className="row" style={{ marginBottom: 4 }}>
@@ -80,23 +99,28 @@ export default function Tab2Page() {
             <div className="row" style={{ marginBottom: 4 }}>
               {udemy.teacher}
             </div>
-            <div className="row">
+            <div
+              className="row"
+              style={{ display: "flex", alignItems: "center" }}
+            >
               <input
                 type="text"
                 value={udemy.schedule}
                 onChange={(e) => handleScheduleChange(udemy.id, e.target.value)}
                 style={{ width: "60%", marginRight: 8 }}
               />
-              <div className="row" style={{ marginBottom: 4 }}>
-                {(
-                  (udemy.schedule.split("/")[0] /
-                    udemy.schedule.split("/")[1]) *
-                  100
-                ).toFixed(2)}
-                %
+              <div className="row" style={{ marginRight: 12 }}>
+                {(parseScheduleRatio(udemy.schedule) * 100).toFixed(2)}%
               </div>
-              <div className="row" style={{ marginBottom: 4 }}>
-                {udemy.schedule.split("/")[0] - udemy.schedule.split("/")[1]}
+              <div className="row">
+                {(() => {
+                  const parts = udemy.schedule.split("/");
+                  if (parts.length !== 2) return "-";
+                  const num1 = parseInt(parts[0], 10);
+                  const num2 = parseInt(parts[1], 10);
+                  if (isNaN(num1) || isNaN(num2)) return "-";
+                  return num1 - num2;
+                })()}
               </div>
             </div>
           </div>
