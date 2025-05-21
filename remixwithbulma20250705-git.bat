@@ -2,7 +2,7 @@ git init
 
 git add .
 
-git commit -m "tab2 sort"
+git commit -m "tab2 edit"
 
 git remote add origin https://github.com/goldshoot0720/remixwithbulma20250705.git
 
