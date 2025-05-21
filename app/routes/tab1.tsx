@@ -33,7 +33,9 @@ export const action: ActionFunction = async ({ request }) => {
 export default function Tab1Page() {
   const initialData = useLoaderData<typeof loader>();
   const fetcher = useFetcher();
-  const [banks, setBanks] = useState(initialData);
+  const [banks, setBanks] = useState(() =>
+    [...initialData].sort((a, b) => b.saving - a.saving)
+  );
 
   // 用 ref 紀錄每個輸入欄的防抖計時器
   const debounceTimers = useRef<Record<number, NodeJS.Timeout>>({});
@@ -56,9 +58,11 @@ export default function Tab1Page() {
       num = parsed < 0 ? 0 : parsed;
     }
 
-    // 更新本地 state
+    // 更新本地 state，並依 saving 由大到小排序
     setBanks((prev) =>
-      prev.map((b) => (b.id === id ? { ...b, saving: num } : b))
+      [...prev.map((b) => (b.id === id ? { ...b, saving: num } : b))].sort(
+        (a, b) => b.saving - a.saving
+      )
     );
 
     // 清除之前的防抖計時器
