@@ -81,10 +81,10 @@ export default function MyNav() {
           Subscribe
         </Link>
         <Link to="/tab4" className="navbar-item">
-          Tab4
+          Video
         </Link>
         <Link to="/tab5" className="navbar-item">
-          Tab5
+          Countdown
         </Link>
         <Link to="/tab6" className="navbar-item">
           Tab6
