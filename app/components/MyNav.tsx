@@ -87,7 +87,7 @@ export default function MyNav() {
           Countdown
         </Link>
         <Link to="/tab6" className="navbar-item">
-          Tab6
+          Quill
         </Link>
         <Link to="/tab7" className="navbar-item">
           Tab7

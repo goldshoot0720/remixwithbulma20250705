@@ -2,6 +2,7 @@ export default function Tab7Page() {
   return (
     <div>
       <h1>Tab7 Page</h1>
+      <button className="delete"></button>
     </div>
   );
 }
